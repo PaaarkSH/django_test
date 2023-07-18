@@ -1,0 +1,7 @@
+# 환경구성
+Django==4.2.3
+asgiref==3.7.2
+pytz==2023.3
+sqlparse==0.4.4
+djangorestframework==3.14
+pytest==7.4.0
