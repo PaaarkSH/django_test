@@ -1,19 +1,14 @@
-FROM python:3.11.4
-
+FROM python:3.11
+ENV PYTHONUNBUFFERED 1
 ENV DJANGO_SETTINGS_MODULE=base.settings.base
 
-WORKDIR /django_test
-COPY . /django_test/
-
+WORKDIR /
+COPY . /
 
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
-RUN python manage.py makemigrations orm_test
-RUN python manage.py migrate orm_test
+RUN pip install --no-cache-dir -r requirements.txt
+RUN chmod +x /entrypoint.sh
+RUN chmod +x /wait-for-it.sh
 
-EXPOSE 8000
-
-COPY entrypoint.sh /django_test/entrypoint.sh
-RUN chmod +x /django_test/entrypoint.sh
-
+# Gunicorn 실행
 CMD ["./entrypoint.sh"]

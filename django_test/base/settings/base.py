@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 from pathlib import Path
+from datetime import timedelta
 
 ALLOWED_HOSTS = ['*']
 
@@ -38,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'orm_test',
+    'user',
+    'car',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +52,22 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),  # 엑세스 토큰 수명 2시간  # 테스트용으로 변경될 수 있음
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  # 리프레쉬 토큰 수명 7일
+    # 슬라이딩 토큰은 따로 설정 안했습니다
+    # 알고리즘 설정
+    "ALGORITHM": "HS256",
+    "SIGNING_KEY": SECRET_KEY,
+    "VERIFYING_KEY": None,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    # 'USER_ID_FIELD': 'id',
+    # 'USER_ID_CLAIM': 'user_id',
+}
+
 
 ROOT_URLCONF = 'base.urls'
 
