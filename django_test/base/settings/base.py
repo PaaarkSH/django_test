@@ -27,7 +27,6 @@ SECRET_KEY = 'django-insecure-8!y37%(niz)9^cqx*1nn!%q7!v=&pf9o_!hnb*(ror58edj&t(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -95,12 +94,27 @@ WSGI_APPLICATION = 'django_test.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
+"""
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR.parent.parent / 'db.sqlite3',
     }
 }
+"""
+
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'mypostgres',  # 데이터베이스 이름을 지정합니다.
+        'USER': 'service_user',      # 사용자 이름을 지정합니다.
+        'PASSWORD': '1234',
+        'HOST': 'db',
+        'PORT': '5432',
+    }
+}
+
 
 LOGGING = {
     "version": 1,
