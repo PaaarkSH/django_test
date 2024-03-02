@@ -18,3 +18,5 @@ docker run -d --rm --name payhere -p 8000:8000 payhere gunicorn base.wsgi:applic
     base.wsgi:application은 Gunicorn이 실행할 Django 애플리케이션의 엔트리 포인트를 지정합니다.
      --bind 0.0.0.0:8000은 Gunicorn이 0.0.0.0 IP 주소와 8000 포트에서 요청을 기다리도록 지정합니다.
         
+
+## 추가사항
