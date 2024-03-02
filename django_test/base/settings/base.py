@@ -94,18 +94,17 @@ WSGI_APPLICATION = 'django_test.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-"""
+# 일단 원하는 부분까지 쓰기전엔 그냥 sqlite 로 개발
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR.parent.parent / 'db.sqlite3',
     }
+
 }
+
 """
-
-
-DATABASES = {
-    'default': {
+'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'mypostgres',  # 데이터베이스 이름을 지정합니다.
         'USER': 'service_user',      # 사용자 이름을 지정합니다.
@@ -113,8 +112,7 @@ DATABASES = {
         'HOST': 'db',
         'PORT': '5432',
     }
-}
-
+"""
 
 LOGGING = {
     "version": 1,
@@ -155,7 +153,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'ko-KR'
 
 TIME_ZONE = 'UTC'
 
