@@ -38,8 +38,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'user',
-    'car',
+
+    # drf
+    'rest_framework',
+    # debug_toolbar
+    'debug_toolbar',
+    # app
+    'blog',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 
@@ -87,8 +93,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'django_test.wsgi.application'
-# ASGI_APPLICATION = 'django_test.asgi.application'
+WSGI_APPLICATION = 'base.wsgi.application'
 
 
 # Database

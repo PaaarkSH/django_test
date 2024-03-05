@@ -7,6 +7,9 @@ sqlparse==0.4.4
 django-environ==0.10.0
 gunicorn==21.2.0
 
+# debug
+django-debug-toolbar==4.3.0
+
 # db
 psycopg2==2.9.6
 

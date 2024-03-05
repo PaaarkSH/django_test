@@ -4,4 +4,4 @@ from rest_framework.response import Response
 
 @api_view(['GET'])
 def alive_check(request):
-    return Response(data={'message': 'ok'})
+    return Response(data={'message': 'ok'}, status=200)
