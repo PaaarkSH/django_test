@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import datetime
 from pathlib import Path
 from datetime import timedelta
 
@@ -27,8 +28,6 @@ SECRET_KEY = 'django-insecure-8!y37%(niz)9^cqx*1nn!%q7!v=&pf9o_!hnb*(ror58edj&t(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -41,11 +40,17 @@ INSTALLED_APPS = [
 
     # drf
     'rest_framework',
+    'rest_framework_simplejwt',
+
     # debug_toolbar
     'debug_toolbar',
     # app
     'blog',
+    'users'
 ]
+
+AUTH_USER_MODEL = "users.User"
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -79,8 +84,7 @@ ROOT_URLCONF = 'base.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
-        ,
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -103,7 +107,7 @@ WSGI_APPLICATION = 'base.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR.parent.parent / 'db.sqlite3',
+        'NAME': BASE_DIR.parent / 'db.sqlite3',
     }
 
 }
@@ -180,3 +184,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 DEFAULT_PERMISSION_CLASSES = [
     'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
 ]
+
+# jwt
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    )
+}
+JWT_AUTH = {
+    'JWT_SECRET_KEY': 'your-secret-key',  # JWT 시크릿 키
+    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),  # JWT 토큰 만료 시간 설정 (옵션)
+    'JWT_ALLOW_REFRESH': True,  # JWT 토큰 갱신 허용 여부 (옵션)
+    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),  # JWT 토큰 갱신 시간 설정 (옵션)
+    'JWT_AUTH_HEADER_PREFIX': 'Bearer',  # JWT 토큰 인증 헤더 접두사 (옵션)
+}
