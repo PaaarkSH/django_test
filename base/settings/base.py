@@ -18,7 +18,6 @@ ALLOWED_HOSTS = ['*']
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
@@ -51,7 +50,6 @@ INSTALLED_APPS = [
 
 AUTH_USER_MODEL = "users.User"
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -62,22 +60,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
-
-
-SIMPLE_JWT = {
-    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),  # 엑세스 토큰 수명 2시간  # 테스트용으로 변경될 수 있음
-    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  # 리프레쉬 토큰 수명 7일
-    # 슬라이딩 토큰은 따로 설정 안했습니다
-    # 알고리즘 설정
-    "ALGORITHM": "HS256",
-    "SIGNING_KEY": SECRET_KEY,
-    "VERIFYING_KEY": None,
-    "AUTH_HEADER_TYPES": ("Bearer",),
-    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
-    # 'USER_ID_FIELD': 'id',
-    # 'USER_ID_CLAIM': 'user_id',
-}
-
 
 ROOT_URLCONF = 'base.urls'
 
@@ -98,7 +80,6 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'base.wsgi.application'
-
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
@@ -158,7 +139,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/4.2/topics/i18n/
 
@@ -169,7 +149,6 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
-
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
@@ -192,10 +171,16 @@ REST_FRAMEWORK = {
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     )
 }
-JWT_AUTH = {
-    'JWT_SECRET_KEY': 'your-secret-key',  # JWT 시크릿 키
-    'JWT_EXPIRATION_DELTA': datetime.timedelta(days=1),  # JWT 토큰 만료 시간 설정 (옵션)
-    'JWT_ALLOW_REFRESH': True,  # JWT 토큰 갱신 허용 여부 (옵션)
-    'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),  # JWT 토큰 갱신 시간 설정 (옵션)
-    'JWT_AUTH_HEADER_PREFIX': 'Bearer',  # JWT 토큰 인증 헤더 접두사 (옵션)
+
+SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(hours=2),  # 엑세스 토큰 수명 2시간  # 테스트용으로 변경될 수 있음
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=7),  # 리프레쉬 토큰 수명 7일
+    # 슬라이딩 토큰은 따로 설정 안했습니다
+    "ALGORITHM": "HS256",  # 알고리즘 설정
+    "SIGNING_KEY": SECRET_KEY,
+    "VERIFYING_KEY": None,
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "AUTH_HEADER_NAME": "HTTP_AUTHORIZATION",
+    # 'USER_ID_FIELD': 'id',
+    # 'USER_ID_CLAIM': 'user_id',
 }
